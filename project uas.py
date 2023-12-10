@@ -64,7 +64,7 @@ class TokoSepatu:
             print(f"Kembalian: Rp. {kembalian:,.2f}")
             print("Terima Kasih")
             # Menyimpan data transaksi dalam file
-            self.simpan_data(total, kembalian)
+            self.simpan_data(total)
             self.keranjang.clear()
         else:
             print("Mohon Maaf Uang Kamu Kurang :(")
