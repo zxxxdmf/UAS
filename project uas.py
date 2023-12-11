@@ -1,7 +1,7 @@
 # MODULARISASI
 from datetime import datetime  # Mengimpor modul datetime untuk pengelolaan waktu
 
-# OPB
+# OOP
 class TokoSepatu:
     def __init__(self):
         # Inisialisasi atribut-atribut untuk menyimpan informasi sepatu, harga, dan keranjang belanja
