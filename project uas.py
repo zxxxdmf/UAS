@@ -55,6 +55,9 @@ class TokoSepatu:
 
     def pembayaran(self):
         # Melakukan proses pembayaran, mencetak struk pembelian, dan membersihkan keranjang
+        if not self.keranjang:
+            print("keranjang kosong, Silahakan Tambahkan Sepatu Ke Dalam Keranjang :(")
+            return
         total = sum(item[1] * item[2] for item in self.keranjang)
         print(f"Total Pembelian Sementara: Rp. {total:,.2f}")
         pembayaran = float(input("Masukkan Jumlah Uang Kamu: "))
@@ -64,12 +67,12 @@ class TokoSepatu:
             print(f"Kembalian: Rp. {kembalian:,.2f}")
             print("Terima Kasih")
             # Menyimpan data transaksi dalam file
-            self.simpan_data(total)
+            self.simpan_data(total, kembalian, pembayaran)
             self.keranjang.clear()
         else:
             print("Mohon Maaf Uang Kamu Kurang :(")
 
-    def simpan_data(self, total):
+    def simpan_data(self, total, kembalian, pembayaran):
         # Membuat timestamp untuk digunakan sebagai bagian dari nama file
         timestamp = datetime.now().strftime('%Y%m%d%H%M%S')
         nama_file = f"struk_pembelian_{timestamp}.txt"
@@ -80,9 +83,10 @@ class TokoSepatu:
             file.write("\nDaftar Pembelian:\n")
             for sepatu in self.keranjang:
                 item_total = sepatu[1] * sepatu[2]
-                file.write(f"{sepatu[2]} {sepatu[0]} (Rp. {sepatu[1]:,.2f}) - Total: Rp. {item_total:,.2f}\n")
-            file.write(f"\nTotal Pembelian: Rp. {total:,.2f}\n")
-            file.write("TERIMA KASIH SUDAH BELANJA DI TOKO KAMI :)")
+                file.write(f"\n{sepatu[2]} {sepatu[0]} (Rp. {sepatu[1]:,.2f}) - Pembelian Total: Rp. {item_total:,.2f}\n")
+            file.write(f"\n Jumlah Uang Yang Dimasukkan: Rp. {pembayaran:,.2f}\n")
+            file.write(f"\n Total Kembalian: Rp. {kembalian:,.2f}\n")
+            file.write("\nTERIMA KASIH SUDAH BELANJA DI TOKO KAMI :)\n")
 
 if __name__ == "__main__":
     # Inisialisasi objek TokoSepatu
